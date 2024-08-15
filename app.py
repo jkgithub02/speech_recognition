@@ -24,12 +24,20 @@ def recognize_speech():
       recognized_text = result['text']
 
       # Check for the termination keyword
-      if "terminei" in recognized_text.lower():
-        st.write("Termination keyword detected. Stopping...")
-        break
-
-      # Display recognized text in Streamlit
-      st.write(recognized_text)
+      if "tanque" in recognized_text.lower():
+        st.write("Tangki: 1")
+      elif "bandeira" in recognized_text.lower():
+        st.write("Bandera: 2")
+        
+      elif "lama" in recognized_text.lower():
+        st.write("Lama: 3")
+      
+      elif "mar" in recognized_text.lower():
+        st.write("Mar: 4")
+      
+      else:
+        # Display recognized text in Streamlit
+        st.write("Detected text: " , recognized_text)
 
   # Stop and close the stream
   stream.stop_stream()
