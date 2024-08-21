@@ -21,13 +21,12 @@ def reset_game():
 # Display the current game status
 st.title("Kristang Word Game- Hangman")
 st.markdown("---")
-st.markdown("<h3 style='font-size: 24px; font-weight: bold; color: #4682B4;'>Instructions:</h3>", unsafe_allow_html=True)
 
 st.markdown("<p style='font-size: 13px; color: #808080;'> 4 Kristang words are hidden, play a game of hangman to discover them and unlock the treasure!</p>", unsafe_allow_html=True)
 st.markdown("<p style='font-size: 13px; color: #808080;'> You have 6 lives, type a letter in the text box and double click the button to submit your guess!</p>", unsafe_allow_html=True)
 st.markdown("<p style='font-size: 13px; color: #808080;'> A wrong guess will result in one life gone, good luck!</p>", unsafe_allow_html=True)
 
-st.markdown("<p style='font-size: 15px,; font-style: italic;'>HINT: The words in English are: 🌊, 💩, 🛢️ and 🏳️</p>", unsafe_allow_html=True)
+st.markdown("<p style='font-size: 15px,; font-style: italic;'>HINT: 🌊, 🏳️, 🛢️ and 💩</p>", unsafe_allow_html=True)
 if st.session_state.lives > 0 and any(word_letters for word_letters in st.session_state.word_list.values()):
     st.write(f'You have {st.session_state.lives} lives left.')
     st.write('Used letters:', ' '.join(st.session_state.used_letters))
