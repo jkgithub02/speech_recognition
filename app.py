@@ -48,6 +48,8 @@ def recognize_speech():
 
 # Initialize Streamlit app
 st.title("Speech Recognition")
+st.write("1.Click the 'Start Recognition' button to start recording.\n2.Refresh the browser or press 'Stop' to stop the recording session.")
+st.write("With the Kristang words you have obtained in the hangman game, pronounce them to unlock the passcode..")
 
 # Session state variable to control recognition loop
 st.session_state.running = False
