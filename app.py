@@ -23,30 +23,21 @@ def recognize_speech():
       result = json.loads(rec.Result())
       recognized_text = result['text']
 
-      keyword_digits = {
-        "tanque": 1,
-        "bandeira": 2,
-        "lama": 3,
-        "mar": 4
-    }
-
-    # Revealed digits
-    revealed_digits = []
-    # Check if the full password is revealed
-    if len(password) == len(set(keyword_digits.values())):
-      st.markdown("<p style='font-size: 13px; color: #808080;'> The complete passcode is: {password}</p>", unsafe_allow_html=True)
+      # Check for the termination keyword
+      if "tanque" in recognized_text.lower():
+        st.write("Tangki: 1")
+      elif "bandeira" in recognized_text.lower():
+        st.write("Bandera: 2")
+        
+      elif "lama" in recognized_text.lower():
+        st.write("Lama: 3")
       
-    # Check for keywords and reveal digits
-    if recognized_text.lower() in keyword_digits:
-        revealed_digits.append(keyword_digits[recognized_text.lower()])
-        password = "".join(map(str, revealed_digits))
-        st.markdown(f"<p style='font-size: 13px; color: #808080;'> Password revealed so far: {password}</p>", unsafe_allow_html=True)
-    else:
-      # Display recognized text in Streamlit
-      st.write("Detected text: " , recognized_text)
-
+      elif "mar" in recognized_text.lower():
+        st.write("Mar: 4")
       
-
+      else:
+        # Display recognized text in Streamlit
+        st.write("Detected text: " , recognized_text)
 
   # Stop and close the stream
   stream.stop_stream()
@@ -58,9 +49,10 @@ def recognize_speech():
 # Initialize Streamlit app
 st.title("Speech Recognition")
 st.markdown("---")
+st.markdown("<h3 style='font-size: 24px; font-weight: bold; color: #4682B4;'>Instructions:</h3>", unsafe_allow_html=True)
 st.markdown("<p style='font-size: 13px; color: #808080;'> Click the 'Start Recognition' button to start recording.</p>", unsafe_allow_html=True)
 st.markdown("<p style='font-size: 13px; color: #808080;'> Refresh the browser or press 'Stop' to stop the recording session.</p>", unsafe_allow_html=True)
-st.markdown("<p style='font-size: 13px; color: #808080;'> With the Kristang words you have obtained in the hangman game, pronounce them to unlock the passcode..</p>",unsafe_allow_html=True)
+st.markdown("<p style='font-size: 13px; color: #808080;'> With the Kristang words you have obtained in the hangman game, pronounce them to unlock the passcode..")
 
 # Session state variable to control recognition loop
 st.session_state.running = False

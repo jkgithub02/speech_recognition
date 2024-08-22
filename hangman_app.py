@@ -1,7 +1,7 @@
 import streamlit as st
 import random
 
-words = ["mar", "lama", "tangki", "bandera"]
+words = ["mar", "tangki", "bandera", "lama"]
 
 # Initialize or reset session state for new games
 if "word_list" not in st.session_state:
@@ -22,12 +22,12 @@ def reset_game():
 st.title("Kristang Word Game- Hangman")
 st.markdown("---")
 
-st.markdown("<p style='font-size: 13px; color: #808080;'> 4 Kristang words are hidden, play a game of hangman to discover them and unlock the treasure!</p>", unsafe_allow_html=True)
+st.markdown("<p style='font-size: 13px; color: #808080;'> 4 Kristang words (🌊 ,🏳️ ,🛢️ ,💩) are hidden, play a game of hangman to discover them and unlock the treasure!</p>", unsafe_allow_html=True)
 st.markdown("<p style='font-size: 13px; color: #808080;'> You have 6 lives, type a letter in the text box and double click the button to submit your guess!</p>", unsafe_allow_html=True)
 st.markdown("<p style='font-size: 13px; color: #808080;'> A wrong guess will result in one life gone, good luck!</p>", unsafe_allow_html=True)
 
 st.markdown("<p style='font-size: 15px,; font-style: italic;'>HINT: Did you know Kristang is actually derived from Portugese? </p>", unsafe_allow_html=True)
-st.markdown("<p style='font-size: 15px,; font-style: bold;'> 🌊 , 🏳️ , 🛢️ , 💩 </p>", unsafe_allow_html=True)
+st.markdown("<p style='font-size: 15px,; font-style: bold;'>  </p>", unsafe_allow_html=True)
 
 if st.session_state.lives > 0 and any(word_letters for word_letters in st.session_state.word_list.values()):
     st.write(f'You have {st.session_state.lives} lives left.')
