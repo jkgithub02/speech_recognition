@@ -57,10 +57,9 @@ def recognize_speech():
 # Initialize Streamlit app
 st.title("Speech Recognition")
 st.markdown("---")
-st.markdown("<h3 style='font-size: 24px; font-weight: bold; color: #4682B4;'>Instructions:</h3>", unsafe_allow_html=True)
-st.markdown("<p style='font-size: 13px; color: #808080;'>Click the 'Start Recognition' button to start recording.</p>", unsafe_allow_html=True)
+st.markdown("<h3 style='font-size: 24px; font-weight: bold; color: #4682B4;'>Tutorial:</h3>", unsafe_allow_html=True)
+st.markdown("<p style='font-size: 15px; color: #808080;'>1. This program detects Kristang speech.<br>2. Click the 'Start Recognition' button to start the recording session.<br>3. Each Kristang word you have solved is assigned one digit to the passcode.<br>4. If other words than the keywords are detected, they will be also be shown.<br>5. Pronounce the Kristang keywords correctly to obtain the full passcode and unlock the treasure!</p>", unsafe_allow_html=True)
 st.markdown("<p style='font-size: 13px; color: #808080;'>Refresh the browser or press 'Stop' to stop the recording session.</p>", unsafe_allow_html=True)
-st.markdown("<p style='font-size: 13px; color: #808080;'>With the Kristang words you have obtained in the hangman game, pronounce them to unlock the passcode.</p>", unsafe_allow_html=True)
 
 # Session state variables
 if 'running' not in st.session_state:
