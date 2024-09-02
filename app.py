@@ -22,7 +22,7 @@ def recognize_speech():
             # Parse the JSON result and get the recognized text
             result = json.loads(rec.Result())
             recognized_text = result['text'].lower()
-            if any(keyword in recognized_text for keyword in ["tanque", "bandeira", "lama", "mar"]):
+            if any(keyword in recognized_text for keyword in ["tanque", "bandeira", "noite", "mar"]):
               # Update the passcode based on recognized keywords
               if "tanque" in recognized_text:
                 st.session_state.passcode[0] = "0"
@@ -30,9 +30,9 @@ def recognize_speech():
               elif "bandeira" in recognized_text:
                 st.session_state.passcode[1] = "1"
                 st.write("Keyword detected: 'Bandera'")
-              elif "lama" in recognized_text:
+              elif "noite" in recognized_text:
                 st.session_state.passcode[2] = "1"
-                st.write("Keyword detected: 'Lama'")
+                st.write("Keyword detected: 'Noite'")
               elif "mar" in recognized_text:
                 st.session_state.passcode[3] = "9"
                 st.write("Keyword detected: 'Mar'")
