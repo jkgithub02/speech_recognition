@@ -24,9 +24,9 @@ def recognize_speech():
             recognized_text = result['text'].lower()
             if any(keyword in recognized_text for keyword in ["tanque", "bandeira", "noite", "mar"]):
               # Update the passcode based on recognized keywords
-              if "tanque" in recognized_text:
+              if "obrigado" in recognized_text:
                 st.session_state.passcode[0] = "0"
-                st.write("Keyword detected: 'Tangki'")
+                st.write("Keyword detected: 'Obrigadu'")
               elif "bandeira" in recognized_text:
                 st.session_state.passcode[1] = "1"
                 st.write("Keyword detected: 'Bandera'")
