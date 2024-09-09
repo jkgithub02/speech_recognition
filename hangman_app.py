@@ -26,7 +26,7 @@ st.markdown("<p style='font-size: 13px; color: #808080;'> 4 Kristang words [Love
 st.markdown("<p style='font-size: 13px; color: #808080;'> You have 6 lives, type a letter in the text box and click the button to submit your guess!</p>", unsafe_allow_html=True)
 st.markdown("<p style='font-size: 13px; color: #808080;'> A wrong guess will result in one life gone, good luck!</p>", unsafe_allow_html=True)
 
-st.markdown("<p style='font-size: 15px,; font-style: italic;'>HINT: Did you know Kristang is actually derived from Portugese? </p>", unsafe_allow_html=True)
+st.markdown("<p style='font-size: 15px,; font-style: italic;'>HINT: Did you know Kristang is actually derived from Portuguese? </p>", unsafe_allow_html=True)
 st.markdown("<p style='font-size: 15px,; font-style: bold;'>  </p>", unsafe_allow_html=True)
 
 if st.session_state.lives > 0 and any(word_letters for word_letters in st.session_state.word_list.values()):
@@ -36,33 +36,29 @@ if st.session_state.lives > 0 and any(word_letters for word_letters in st.sessio
     # Input for guessing a letter
     user_letter = st.text_input("Guess a letter:", max_chars=1).lower()
 
-    # Store the letter in session state immediately after typing
-    if user_letter:
-        st.session_state.user_letter = user_letter
+    # Only process if the user enters a letter and clicks submit
+    if st.button("Submit Guess") and user_letter:
+        # Process user input immediately
+        if user_letter in st.session_state.alphabet - st.session_state.used_letters:
+            st.session_state.used_letters.add(user_letter)
+            found_letter = False
 
-    # Button to submit guess
-    if st.button("Submit Guess"):
-        user_letter = st.session_state.user_letter
+            # Check if letter exists in any word and update word set
+            for word, word_letters in st.session_state.word_list.items():
+                if user_letter in word_letters:
+                    word_letters.remove(user_letter)
+                    found_letter = True
 
-        if user_letter:
-            if user_letter in st.session_state.alphabet - st.session_state.used_letters:
-                st.session_state.used_letters.add(user_letter)
-                found_letter = False
+            # If no match, reduce a life
+            if not found_letter:
+                st.session_state.lives -= 1
+                st.write('Letter is not in any word.')
 
-                for word, word_letters in st.session_state.word_list.items():
-                    if user_letter in word_letters:
-                        word_letters.remove(user_letter)
-                        found_letter = True
+        elif user_letter in st.session_state.used_letters:
+            st.write('You have already used that letter.')
 
-                if not found_letter:
-                    st.session_state.lives -= 1
-                    st.write('Letter is not in any word.')
-
-            elif user_letter in st.session_state.used_letters:
-                st.write('You have already used that letter.')
-
-            else:
-                st.write('That is not a valid letter.')
+        else:
+            st.write('That is not a valid letter.')
 
     # Display words with guessed letters
     for word in words:
