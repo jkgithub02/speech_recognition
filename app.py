@@ -81,6 +81,3 @@ if st.button("Start Recognition"):
     st.session_state.running = True
     recognize_speech()
 
-# Stop recognition button
-if st.button("Stop Recognition"):
-    st.session_state.running = False
