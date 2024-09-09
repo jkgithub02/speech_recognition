@@ -36,10 +36,17 @@ if st.session_state.lives > 0 and any(word_letters for word_letters in st.sessio
     # Input for guessing a letter
     user_letter = st.text_input("Guess a letter:", max_chars=1).lower()
 
+    # Store the letter in session state immediately after typing
+    if user_letter:
+        st.session_state.user_letter = user_letter
+
     # Button to submit guess
     if st.button("Submit Guess"):
+        user_letter = st.session_state.user_letter
+
         if user_letter:
             if user_letter in st.session_state.alphabet - st.session_state.used_letters:
+                st.session_state.used_letters.add(user_letter)
                 found_letter = False
 
                 for word, word_letters in st.session_state.word_list.items():
@@ -47,9 +54,7 @@ if st.session_state.lives > 0 and any(word_letters for word_letters in st.sessio
                         word_letters.remove(user_letter)
                         found_letter = True
 
-                if found_letter:
-                    st.session_state.used_letters.add(user_letter)
-                else:
+                if not found_letter:
                     st.session_state.lives -= 1
                     st.write('Letter is not in any word.')
 
