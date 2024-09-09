@@ -37,20 +37,20 @@ def recognize_speech():
 
             # Apply filtering based on confidence if present
             if result.get('confidence', 1.0) >= 0.7:
-                if any(keyword in recognized_text for keyword in ["obrigado", "bandeira", "noite", "mar"]):
+                if any(keyword in recognized_text for keyword in ["obrigado", "casa", "noite", "amor"]):
                     # Update the passcode based on recognized keywords
                     if "obrigado" in recognized_text:
                         st.session_state.passcode[0] = "0"
                         st.write("<span style='color: green;'>Keyword detected: 'Obrigado'</span>", unsafe_allow_html=True)
-                    elif "bandeira" in recognized_text:
+                    elif "casa" in recognized_text:
                         st.session_state.passcode[1] = "1"
-                        st.write("<span style='color: blue;'>Keyword detected: 'Bandeira'</span>", unsafe_allow_html=True)
+                        st.write("<span style='color: blue;'>Keyword detected: 'Kaza'</span>", unsafe_allow_html=True)
                     elif "noite" in recognized_text:
                         st.session_state.passcode[2] = "1"
                         st.write("<span style='color: purple;'>Keyword detected: 'Noite'</span>", unsafe_allow_html=True)
-                    elif "mar" in recognized_text:
+                    elif "amor" in recognized_text:
                         st.session_state.passcode[3] = "9"
-                        st.write("<span style='color: teal;'>Keyword detected: 'Mar'</span>", unsafe_allow_html=True)
+                        st.write("<span style='color: teal;'>Keyword detected: 'Amor'</span>", unsafe_allow_html=True)
 
                     # Update passcode and progress bar
                     passcode_box.markdown(

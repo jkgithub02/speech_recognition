@@ -1,7 +1,7 @@
 import streamlit as st
 import random
 
-words = ["mar", "obrigadu", "bandera", "noite"]
+words = ["amor", "obrigadu", "kaza", "noite"]
 
 # Initialize or reset session state for new games
 if "word_list" not in st.session_state:
@@ -22,7 +22,7 @@ def reset_game():
 st.title("Kristang Word Game- Hangman")
 st.markdown("---")
 
-st.markdown("<p style='font-size: 13px; color: #808080;'> 4 Kristang words [Sea, Thank You, Flag, Night] are hidden, play a game of hangman to discover them and unlock the treasure!</p>", unsafe_allow_html=True)
+st.markdown("<p style='font-size: 13px; color: #808080;'> 4 Kristang words [Love, Thank You, House, Night] are hidden, play a game of hangman to discover them and unlock the treasure!</p>", unsafe_allow_html=True)
 st.markdown("<p style='font-size: 13px; color: #808080;'> You have 6 lives, type a letter in the text box and click the button to submit your guess!</p>", unsafe_allow_html=True)
 st.markdown("<p style='font-size: 13px; color: #808080;'> A wrong guess will result in one life gone, good luck!</p>", unsafe_allow_html=True)
 
