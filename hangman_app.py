@@ -10,6 +10,7 @@ if "word_list" not in st.session_state:
     st.session_state.used_letters = set()
     st.session_state.lives = 6
     st.session_state.user_letter = ""
+    st.session_state.last_guess = ""  # Track the last guessed letter
 
 # Function to reset the game
 def reset_game():
@@ -17,6 +18,7 @@ def reset_game():
     st.session_state.used_letters = set()
     st.session_state.lives = 6
     st.session_state.user_letter = ""
+    st.session_state.last_guess = ""
 
 # Display the current game status
 st.title("Kristang Word Game- Hangman")
@@ -29,6 +31,7 @@ st.markdown("<p style='font-size: 13px; color: #808080;'> A wrong guess will res
 st.markdown("<p style='font-size: 15px,; font-style: italic;'>HINT: Did you know Kristang is actually derived from Portuguese? </p>", unsafe_allow_html=True)
 st.markdown("<p style='font-size: 15px,; font-style: bold;'>  </p>", unsafe_allow_html=True)
 
+# Only display if the game is still ongoing
 if st.session_state.lives > 0 and any(word_letters for word_letters in st.session_state.word_list.values()):
     st.write(f'You have {st.session_state.lives} lives left.')
     st.write('Used letters:', ' '.join(st.session_state.used_letters))
@@ -36,8 +39,14 @@ if st.session_state.lives > 0 and any(word_letters for word_letters in st.sessio
     # Input for guessing a letter
     user_letter = st.text_input("Guess a letter:", max_chars=1).lower()
 
-    # Only process if the user enters a letter and clicks submit
-    if st.button("Submit Guess") and user_letter:
+    # Button to submit guess
+    if st.button("Submit Guess"):
+        # Ensure the user input is saved correctly
+        if user_letter:
+            st.session_state.last_guess = user_letter
+
+        user_letter = st.session_state.last_guess
+
         # Process user input immediately
         if user_letter in st.session_state.alphabet - st.session_state.used_letters:
             st.session_state.used_letters.add(user_letter)
@@ -52,10 +61,10 @@ if st.session_state.lives > 0 and any(word_letters for word_letters in st.sessio
             # If no match, reduce a life
             if not found_letter:
                 st.session_state.lives -= 1
-                st.write('Letter is not in any word.')
+                st.write(f'Letter "{user_letter}" is not in any word.')
 
         elif user_letter in st.session_state.used_letters:
-            st.write('You have already used that letter.')
+            st.write(f'You have already used the letter "{user_letter}".')
 
         else:
             st.write('That is not a valid letter.')
@@ -66,6 +75,7 @@ if st.session_state.lives > 0 and any(word_letters for word_letters in st.sessio
         st.write(' '.join(word_display))
 
 else:
+    # End of game scenario
     if st.session_state.lives == 0:
         st.write('You died, sorry.')
     else:
