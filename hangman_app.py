@@ -40,7 +40,6 @@ if st.session_state.lives > 0 and any(word_letters for word_letters in st.sessio
     if st.button("Submit Guess"):
         if user_letter:
             if user_letter in st.session_state.alphabet - st.session_state.used_letters:
-                st.session_state.used_letters.add(user_letter)
                 found_letter = False
 
                 for word, word_letters in st.session_state.word_list.items():
@@ -48,7 +47,9 @@ if st.session_state.lives > 0 and any(word_letters for word_letters in st.sessio
                         word_letters.remove(user_letter)
                         found_letter = True
 
-                if not found_letter:
+                if found_letter:
+                    st.session_state.used_letters.add(user_letter)
+                else:
                     st.session_state.lives -= 1
                     st.write('Letter is not in any word.')
 
